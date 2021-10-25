@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-col size="6" offset="">
+      Characters
+    </ion-col>
+    
+
+  </ion-toolbar>
+</ion-header>
+
+<mat-paginator [length]="615"
+               [pageSize]="page_size"
+               [pageSizeOptions]="[5,10]"
+               (page)="handlePage($event)"
+               aria-label="Select page">
+</mat-paginator>
+<!-- <pagination-controls  id="some_id"
+                      (pageChange)="handlePage($event)"
+                      (pageBoundsCorrection)="pageChanged($event)"
+                      maxSize="10"
+                      directionLinks="true"
+                      autoHide="false"
+                      responsive="true"
+                      previousLabel="Previous"
+                      nextLabel="Next"
+                      screenReaderPaginationLabel="Pagination"
+                      screenReaderPageLabel="page"
+                      screenReaderCurrentLabel="You're on page">
+</pagination-controls> -->
+
+<ion-content color="primary">
+  <mat-list *ngFor="let char of characters | paginate: { 
+  itemsPerPage: page_size,
+  currentPage: page_number,
+  
+  totalItems: 615}; let i = index "  >
+    <mat-card   [routerLink]="['/message', char.id]"
+     
+     
+     >
+    <mat-card-header>
+  
+    </mat-card-header>
+        <mat-card-subtitle >
+          <ion-col size="auto" style="float: left; color: black;">
+            {{i + 1}}
+          </ion-col>
+          <ion-col size="auto" style="float: right; color: black;">
+            <!-- {{pedido.estado}} -->
+          </ion-col>
+          </mat-card-subtitle>
+  <br>
+          <div>
+            <ion-row class="ion-text-center">
+              Nombre: {{char.name}}
+               <!-- Cliente: {{pedido.nombreCliente}} - Local: {{pedido.nombre_local}} --> 
+            </ion-row> 
+            <ion-thumbnail>
+              <img [src]="char.image_" />
+            </ion-thumbnail>
+            <!-- <img [src]="char.image_" alt="" style="max-height: 90px;"> -->
+          </div>
+  
+    </mat-card>
+  </mat-list>
+
+</ion-content>
